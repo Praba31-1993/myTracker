@@ -41,11 +41,12 @@ textarea{min-height:58px;resize:vertical}.btn{border:0;border-radius:7px;padding
 @media(max-width:850px){nav{width:195px}main{padding:14px}.task{grid-template-columns:25px 1fr}.task select,.task button{grid-column:2}}
 @media print{nav,header,.no-print{display:none!important}.layout{display:block}main{padding:0}.page{display:none!important}.page.active{display:block!important}.btn{display:none!important}.level,.goal,.panel,.card{box-shadow:none}}
 </style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 <header>
   <div style="display:flex;align-items:center;gap:12px"><div style="flex:1"><h1>My Life Mission Tracker — Age 32 to 50+</h1>
-  <p>Foundation → Growth → Business Creation → CEO → Vision Execution → Legacy / ₹2,000 Crore Vision</p></div><span id="saveState" style="font-size:12px;color:#dbe9f5">Connecting to Excel...</span><button class="btn secondary no-print" onclick="downloadExcelFile()">Download Excel</button></div>
+  <p>Foundation → Growth → Business Creation → CEO → Vision Execution → Legacy / ₹2,000 Crore Vision</p></div><span id="saveState" style="font-size:12px;color:#dbe9f5">Connecting to Excel...</span><button class="btn secondary no-print" onclick="exportCurrentExcel()">Download Excel</button></div>
 </header>
 
 <div class="layout">
@@ -88,7 +89,7 @@ textarea{min-height:58px;resize:vertical}.btn{border:0;border-radius:7px;padding
 <section id="goals" class="page">
   <div class="row">
     <div><h2>My Complete Goals</h2><p class="muted">All six levels. Future levels remain view-only until the previous level reaches 100%.</p></div><button class="btn primary right no-print" onclick="createGoalFromComplete()">+ Create Goal</button>
-    <div class="right no-print"><button class="btn primary" onclick="printAll()">Print / Save PDF</button><button class="btn secondary" onclick="exportCSV()">Download CSV</button></div>
+    <div class="right no-print"><button class="btn primary" onclick="exportCurrentPDF()">📄 PDF</button><button class="btn secondary" onclick="exportCurrentWord()">📝 Word</button><button class="btn secondary" onclick="exportCurrentExcel()">📊 Excel</button></div>
   </div>
   <div id="allGoals"></div>
 </section>
@@ -431,6 +432,32 @@ function deleteHabit(i){
 function printCurrent(){window.print()}
 function printAll(){window.print()}
 function printLevel(l){window.print()}
+
+function activePageId(){const p=document.querySelector(".page.active");return p?p.id:"dashboard";}
+function pageTitle(id){return ({dashboard:"Dashboard",goals:"Complete Goals",level1:"Level 1 - Foundation",level2:"Level 2 - Growth",level3:"Level 3 - Business Creation",level4:"Level 4 - CEO",level5:"Level 5 - Vision Execution",level6:"Level 6 - Legacy",habits:"Habits & Schedule"})[id]||id;}
+function clonePageForExport(id){
+ const src=document.getElementById(id), wrap=document.createElement("div"); wrap.innerHTML=src.innerHTML;
+ wrap.querySelectorAll(".no-print,button").forEach(x=>x.remove());
+ wrap.querySelectorAll("input,select,textarea").forEach(x=>{const span=document.createElement("span");span.textContent=x.type==="checkbox"?(x.checked?"☑":"☐"):(x.value||"");span.style="display:inline-block;padding:4px 6px;border-bottom:1px solid #ccc;min-width:80px";x.replaceWith(span);});
+ return wrap;
+}
+function exportStyles(){return `<style>body{font-family:Arial;color:#172033;padding:24px}.export-meta{color:#687386;font-size:12px;margin-bottom:18px}.card,.panel,.goal,.level{border:1px solid #dce4ec;border-radius:8px;padding:12px;margin:10px 0}.metric{font-size:22px;font-weight:bold}.progress{height:10px;background:#e7edf3;border-radius:10px}.fill{height:100%;background:#2e75b6}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:7px;text-align:left}@media print{body{padding:10mm}@page{size:A4;margin:10mm}}</style>`;}
+function downloadBlob(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+function slug(x){return String(x).replace(/[^a-z0-9]+/gi,"_").replace(/^_|_$/g,"");}
+function exportWord(id){const title=pageTitle(id),html=`<!doctype html><html><head><meta charset="utf-8">${exportStyles()}</head><body><h1>${esc(title)}</h1><div class="export-meta">My Life Mission Tracker</div>${clonePageForExport(id).outerHTML}</body></html>`;downloadBlob(new Blob(["\ufeff",html],{type:"application/msword"}),`${slug(title)}.doc`);}
+function exportCurrentWord(){exportWord(activePageId())}
+function exportLevelWord(l){exportWord("level"+(l+1))}
+function exportHabitsWord(){exportWord("habits")}
+function exportPDF(id){const title=pageTitle(id),w=window.open("","_blank");w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title>${exportStyles()}</head><body><h1>${esc(title)}</h1><div class="export-meta">My Life Mission Tracker</div>${clonePageForExport(id).outerHTML}<script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script></body></html>`);w.document.close();}
+function exportCurrentPDF(){exportPDF(activePageId())}
+function exportLevelPDF(l){exportPDF("level"+(l+1))}
+function exportHabitsPDF(){exportPDF("habits")}
+function makeExcel(rows,name,sheet){if(typeof XLSX==="undefined"){alert("Excel library not loaded.");return;}const ws=XLSX.utils.aoa_to_sheet(rows),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,sheet);XLSX.writeFile(wb,name);}
+function exportHabitsExcel(){const rows=[["Completed","Activity","Start Time","End Time","Frequency"]];normalizeHabits().forEach((x,i)=>rows.push([get("HD"+i)==="1"?"Yes":"No",x[2],x[0],x[1],x[3]]));makeExcel(rows,"Habits_and_Schedule.xlsx","Habits & Schedule");}
+function exportLevelExcel(l){const rows=[["Level","Period","Purpose","Main Goal","Description","Sub-goal","Status","Completed","Goal %","Level %"]];L[l].goals.forEach((g,gi)=>g[2].forEach((t,ti)=>rows.push([L[l].title,L[l].period,L[l].purpose,g[0],g[1],t,get(`S${l}G${gi}T${ti}`,"Not Started"),get(`L${l}G${gi}T${ti}`)==="1"?"Yes":"No",gp(l,gi)+"%",lp(l)+"%"])));makeExcel(rows,`Level_${l+1}_${slug(L[l].title)}.xlsx`,`Level ${l+1}`);}
+function exportGoalsExcel(){const rows=[["Level","Period","Purpose","Main Goal","Description","Goal %","Level %"]];L.forEach((x,l)=>x.goals.forEach((g,gi)=>rows.push([x.title,x.period,x.purpose,g[0],g[1],gp(l,gi)+"%",lp(l)+"%"])));makeExcel(rows,"Complete_Goals.xlsx","Complete Goals");}
+function exportDashboardExcel(){const rows=[["Level","Period","Purpose","Progress %","Status"]];L.forEach((x,l)=>rows.push([x.title,x.period,x.purpose,lp(l)+"%",lp(l)===100?"Completed":!unlocked(l)?"Locked":"Active"]));makeExcel(rows,"Dashboard.xlsx","Dashboard");}
+function exportCurrentExcel(){const id=activePageId();if(id==="habits")exportHabitsExcel();else if(id==="goals")exportGoalsExcel();else if(id.startsWith("level"))exportLevelExcel(Number(id.slice(5))-1);else exportDashboardExcel();}
 
 function exportCSV(l=null){
   let rows=[["Level","Period","Purpose","Main Goal","Description","Sub-goal","Status","Completed","Goal %","Level %"]];
