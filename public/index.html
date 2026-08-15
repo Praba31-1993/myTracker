@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Life Vision Tracker — Age 32 to 50+</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#102a43;color:#fff;padding:18px 25px;position:sticky;top:0;z-index:20}
+header h1{margin:0;font-size:23px}header p{margin:4px 0;font-size:13px;color:#dbe9f5}
+.layout{display:flex;min-height:calc(100vh - 78px)}
+nav{width:255px;background:#173b5d;padding:13px;position:sticky;top:78px;height:calc(100vh - 78px);overflow:auto}
+nav button{display:block;width:100%;padding:10px;border:0;border-radius:7px;background:transparent;color:#e5eef7;text-align:left;margin:3px 0;cursor:pointer}
+nav button:hover,nav button.active{background:#2d638d}
+main{flex:1;padding:24px;max-width:1600px}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card,.panel,.goal,.level{background:#fff;border:1px solid #dce4ec;border-radius:12px;padding:16px;box-shadow:0 2px 7px #00000008}
+.metric{font-size:28px;font-weight:700}.muted{font-size:12px;color:#687386}
+.progress{height:11px;background:#e7edf3;border-radius:20px;overflow:hidden}.fill{height:100%;background:#2e75b6}.green{background:#198754}
+.level{margin:15px 0}.level.locked{background:#f5f6f8}.level.active{border:2px solid #2e75b6}.level.done{border:2px solid #198754}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.right{margin-left:auto}
+.badge{padding:4px 9px;border-radius:20px;background:#e8f1f8;font-size:11px}.lock{background:#fff0d8;color:#965a00}.done{background:#e5f6ec;color:#14723e}
+.goal{margin:14px 0}.goal-head{display:flex;gap:12px;align-items:flex-start}.goal-body{flex:1}
+.task{display:grid;grid-template-columns:27px 1fr 150px 36px;gap:8px;align-items:center;border-top:1px solid #edf0f3;padding:9px 0}
+input,select,textarea{width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px}
+textarea{min-height:58px;resize:vertical}.btn{border:0;border-radius:7px;padding:9px 13px;cursor:pointer}
+.primary{background:#173b5d;color:white}.secondary{background:#e8f1f8;color:#173b5d}.danger{background:#fde9e9;color:#a61b1b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:15px;margin-top:15px}
+.notice{padding:12px;background:#fff4e5;border-left:4px solid #d97706;border-radius:7px;margin:10px 0}
+.success{background:#eaf7ef;border-left-color:#198754}
+.small{font-size:12px}.vision{font-size:15px;line-height:1.6}
+.goal-summary{padding:10px 0;border-bottom:1px solid #edf0f3}
+.schedule-head{display:grid;grid-template-columns:28px minmax(220px,1fr) 150px 150px 150px 40px;gap:10px;align-items:center;padding:0 8px 9px;font-size:12px;color:#687386;font-weight:600}
+.schedule-row{display:grid;grid-template-columns:28px minmax(220px,1fr) 150px 150px 150px 40px;gap:10px;align-items:center;border-top:1px solid #edf0f3;padding:10px 8px}
+.schedule-row input[type=checkbox]{width:18px;height:18px;margin:auto}.schedule-row select{min-width:0;width:100%;background:white}.schedule-row input[type=time]{min-width:0}
+@media(max-width:1050px){.schedule-head{display:none}.schedule-row{grid-template-columns:28px minmax(180px,1fr) 125px 125px 130px 40px}}
+@media(max-width:700px){.schedule-row{grid-template-columns:28px 1fr 1fr}.schedule-row .schedule-time-label,.schedule-row select,.schedule-row button{grid-column:2}.schedule-row select{width:100%}}
+.goal-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+@media(max-width:850px){nav{width:195px}main{padding:14px}.task{grid-template-columns:25px 1fr}.task select,.task button{grid-column:2}}
+@media print{nav,header,.no-print{display:none!important}.layout{display:block}main{padding:0}.page{display:none!important}.page.active{display:block!important}.btn{display:none!important}.level,.goal,.panel,.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:12px"><div style="flex:1"><h1>My Life Mission Tracker — Age 32 to 50+</h1>
+  <p>Foundation → Growth → Business Creation → CEO → Vision Execution → Legacy / ₹2,000 Crore Vision</p></div><span id="saveState" style="font-size:12px;color:#dbe9f5">Connecting to Excel...</span><button class="btn secondary no-print" onclick="downloadExcelFile()">Download Excel</button></div>
+</header>
+
+<div class="layout">
+<nav>
+  <button class="active" onclick="page('dashboard',this)">📊 Dashboard</button>
+  <button onclick="page('goals',this)">🎯 Complete Goals</button>
+  <button onclick="page('level1',this)">🟢 Level 1 — Foundation</button>
+  <button onclick="page('level2',this)">🔵 Level 2 — Growth</button>
+  <button onclick="page('level3',this)">🟠 Level 3 — Business Creation</button>
+  <button onclick="page('level4',this)">🟣 Level 4 — CEO</button>
+  <button onclick="page('level5',this)">🟡 Level 5 — Vision Execution</button>
+  <button onclick="page('level6',this)">🔴 Level 6 — Legacy</button>
+  <button onclick="page('habits',this)">✅ Habits & Schedule</button>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+  <h2>Dashboard</h2>
+  <div class="cards">
+    <div class="card"><div class="muted">CURRENT LEVEL</div><div class="metric" id="cur"></div></div>
+    <div class="card"><div class="muted">OVERALL ROADMAP</div><div class="metric" id="overall"></div><div class="progress"><div id="overallBar" class="fill"></div></div></div>
+    <div class="card"><div class="muted">ACTIVE LEVEL PROGRESS</div><div class="metric" id="active"></div><div class="progress"><div id="activeBar" class="fill"></div></div></div>
+    <div class="card"><div class="muted">PENDING ACTIVITIES</div><div class="metric" id="pending"></div></div>
+  </div>
+  <div class="panel" style="margin-top:16px">
+    <h2>Age 32 → 50+ Roadmap</h2>
+    <div id="levelsDash"></div>
+  </div>
+  <div class="grid">
+    <div class="panel"><h2>🔴 What I Need To Do Now</h2><div id="todo"></div></div>
+    <div class="panel">
+      <h2>🎯 Vision Principle</h2>
+      <p class="vision">Do not try to execute the ₹2,000 crore vision every morning. Complete the current level first. Each level creates the foundation required for the next one.</p>
+      <button class="btn primary" onclick="printCurrent()">Print / Save PDF</button>
+      <button class="btn secondary" onclick="exportCSV()">Export CSV</button>
+    </div>
+  </div>
+</section>
+
+<section id="goals" class="page">
+  <div class="row">
+    <div><h2>My Complete Goals</h2><p class="muted">All six levels. Future levels remain view-only until the previous level reaches 100%.</p></div><button class="btn primary right no-print" onclick="createGoalFromComplete()">+ Create Goal</button>
+    <div class="right no-print"><button class="btn primary" onclick="printAll()">Print / Save PDF</button><button class="btn secondary" onclick="exportCSV()">Download CSV</button></div>
+  </div>
+  <div id="allGoals"></div>
+</section>
+
+<section id="level1" class="page"></section>
+<section id="level2" class="page"></section>
+<section id="level3" class="page"></section>
+<section id="level4" class="page"></section>
+<section id="level5" class="page"></section>
+<section id="level6" class="page"></section>
+
+<section id="habits" class="page">
+  <h2>Habits & Schedule</h2>
+  <div class="panel"><div id="habitsBox"></div><div class="goal-actions no-print"><button class="btn secondary" onclick="addHabit()">+ Add Schedule</button><button class="btn primary" onclick="saveHabits()">Save Schedule</button></div></div>
+</section>
+
+
+</main></div>
+
+<script>
+const KEY="LIFE6_";
+
+let L=[
+{title:"Level 1 — FOUNDATION",period:"Age 32–33 | Aug 2026–Aug 2027",purpose:"Build Yourself",goals:[
+["Career — Strong Product / MNC Role","Strengthen your career foundation and move toward a strong product-company/MNC opportunity.",["Resume + LinkedIn","GitHub portfolio","React + TypeScript interview preparation","Next.js + Node.js backend skills","MongoDB + AWS + Terraform","Testing with Jest + Playwright","DSA + System Design","Mock interviews","Apply consistently","Secure target role"]],
+["Salary — ₹75,000/month","Reach a monthly salary of at least ₹75,000.",["Identify current salary gap","Create salary-growth plan","Complete interview preparation","Attend mock interviews","Apply to target companies","Attend interviews","Negotiate offer","Secure ₹75,000+ monthly salary"]],
+["Product #1 — Build & Launch","Build and launch the first real software product.",["Choose customer problem","Define target users","Define MVP","Design UI/UX","Develop frontend","Develop backend/API","Database + authentication","Testing","AWS deployment","Public launch","Get first users","Collect feedback","Improve product"]],
+["Communication — Tamil + English","Become confident in everyday communication, professional communication and public speaking.",["Record 10 speaking videos","Daily English speaking","Daily Tamil speaking","Practice introductions","Talk with new people","Group discussions","Interview speaking practice","Give one public-speaking opportunity","Improve vocabulary and clarity"]],
+["Fitness — Lose 10 KG","Build a consistent fitness lifestyle and reduce weight/body fat.",["Record starting weight","Record waist measurement","Workout consistently","Improve food habits","Weekly weight tracking","Monthly waist tracking","Build sleep discipline","Reach 5 KG loss","Reach 10 KG loss","Maintain the result"]],
+["Savings — First ₹10,000","Build the first savings milestone and disciplined money habit.",["Create dedicated savings plan","Track monthly expenses","Reduce unnecessary spending","Save every month","Reach ₹5,000","Reach ₹10,000","Maintain savings habit"]],
+["Rotaract — Minimum 4 Projects", "Complete at least four meaningful Rotaract projects during Level 1 and build your foundation as a project leader.", ["Project 1 — Community Service", "Project 2 — Education / Youth", "Project 3 — Health / Environment", "Project 4 — Social Awareness / Fundraising", "Prepare project plan and budget", "Lead volunteers", "Document beneficiaries and outcomes", "Complete project reports"]]
+]},
+{title:"Level 2 — GROWTH",period:"Age 33–36",purpose:"Build Skills + Audience",goals:[
+["Product #2 — Build & Launch","Build the second software product using lessons from Product #1.",["Research problem","Validate customer need","Define MVP","Design product","Build frontend","Build backend","Authentication + database","Testing","Deploy","Launch","Acquire first users","Collect feedback","Generate first revenue"]],
+["YouTube — Build Audience","Create a YouTube channel and build a consistent audience.",["Choose niche","Create channel","Create branding","Define content pillars","Create first 10 Shorts","Publish consistently","Create long-form content","Track analytics","Improve thumbnails/titles","Build audience","Develop content calendar"]],
+["Video Editing + AI Content","Develop practical editing and AI-assisted content creation skills.",["Learn editing fundamentals","Practice Shorts editing","Create 10 practice videos","Learn AI video workflow","Create AI-assisted videos","Build reusable templates","Create publishing workflow","Improve quality and storytelling"]],
+["Fitness — Six Pack + Yoga","Move from weight loss into strong body composition, six-pack fitness and Yoga.",["Maintain workout routine","Strength training","Core training","Improve nutrition","Track body composition","Learn Yoga basics","Practice Yoga consistently","Build flexibility","Reach six-pack target","Maintain result"]],
+["Finance — Stronger Savings","Build stronger savings discipline and begin preparing for larger investments.",["Monthly savings system","Emergency reserve","Track net worth","Reach ₹15,000 milestone","Reach ₹25,000 milestone","Increase savings rate","Learn basic investing","Review finances quarterly"]],
+["Rotaract — Minimum 4 Projects", "Complete at least four meaningful Rotaract projects while building stronger leadership and community impact.", ["Project 1 — Education / Skill Development", "Project 2 — Health / Wellness", "Project 3 — Environment / Community Development", "Project 4 — Youth Leadership / Fundraising", "Lead volunteers", "Measure beneficiaries and outcomes", "Publish project impact report"]]
+]},
+{title:"Level 3 — BUSINESS CREATION",period:"Age 36–41",purpose:"Build Businesses",goals:[
+["Product #3 — Build & Launch","Launch the third software product and create a repeatable product-building system.",["Research market","Validate problem","Define MVP","Build product","Test with users","Deploy","Launch","Acquire first users","First revenue","Improve retention","Document product operations"]],
+["YouTube — Income + Distribution","Turn YouTube into an income source and a distribution channel for future businesses.",["Create consistent content system","Grow audience","Study monetization","Meet applicable eligibility","Earn first income","Build sponsorship capability","Create repeatable content strategy","Use audience to support products","Track monthly revenue"]],
+["Training Center — Start Small","Start a validated training-center business covering Software, Yoga, Tuition and Sports.",["Research business model","Choose location/model","Define courses","Software curriculum","Yoga curriculum","Tuition curriculum","Sports curriculum","Recruit first trainers","Get first learners","Run first paid batch","Collect feedback","Create SOPs","Validate unit economics"]],
+["Business Operations","Learn to operate a small business with systems instead of doing everything personally.",["Basic accounting system","Sales process","Customer support process","Marketing process","Hiring process","Trainer/team management","Monthly P&L review","Document SOPs","Delegate recurring work"]],
+["Finance — Build Capital","Move from personal savings toward meaningful capital for future business expansion.",["Build emergency reserve","Track net worth","Increase savings/investments","Learn business finance","Review investments yearly","Create expansion fund","Prepare capital allocation rules"]],
+["Rotaract — Minimum 4 Projects", "Complete at least four meaningful Rotaract projects while building business, team and community leadership.", ["Project 1 — Large Community Project", "Project 2 — Education / Career Project", "Project 3 — Health / Sports Project", "Project 4 — Environment / Social Impact Project", "Build project teams", "Partner with organizations", "Track budget and impact", "Document project results"]]
+]},
+{title:"Level 4 — CEO",period:"Age 41–48",purpose:"Become CEO + Build Capital",goals:[
+["Software CEO — Product Portfolio","Become the CEO/operator of a scalable software business with multiple products.",["Build leadership team","Product roadmap","Sales process","Marketing process","Customer support system","Finance system","HR/recruitment process","Company KPIs","Scale customers","Track profit and cash flow","Build managers","Reduce founder dependency"]],
+["Multiple Businesses — Revenue Streams","Operate multiple validated businesses with professional management.",["Software products","YouTube/content","Training center","Yoga business","Sports business","Other validated businesses","Appoint managers","Create SOPs","Set business KPIs","Review each business monthly"]],
+["Capital — Savings + Investments","Build strong capital, savings and investments for large-scale expansion.",["Build lakhs-level savings","Create investment plan","Diversify investments","Track net worth yearly","Maintain emergency reserve","Create business investment fund","Study acquisitions/partnerships","Build capital allocation discipline"]],
+["Training Center — Validated Model","Turn the training center into a professional, scalable business model.",["Multiple trainers","Multiple batches","Online + offline programs","Strong curriculum","Brand building","Management systems","Profitability tracking","Prepare multiple-location model"]],
+["Leadership + Public Speaking","Develop the leadership capability required to manage people, businesses and large initiatives.",["Lead teams","Mentor leaders","Public speaking","Negotiation","Decision making","Strategic planning","CEO communication","Build leadership culture"]],
+["Rotaract / Rotary Leadership","Build long-term community leadership alongside business leadership.",["Project leadership","Club leadership","President-level responsibility","Rotary leadership exposure","Community projects","Mentor younger leaders","Build long-term service identity"]]
+]},
+{title:"Level 5 — VISION EXECUTION",period:"Age 48–50",purpose:"Execute the Big Vision",goals:[
+["Large Training Center","Expand the validated training model into a large multi-program training organization.",["Software training","Yoga training","Tuition programs","Sports programs","Multiple trainers","Multiple batches","Online + offline","Multiple locations","Strong brand","Professional operations","Track profitability","Build leadership team"]],
+["Sports Academy","Build a professional sports academy beginning with one sport and expand only after proving the model.",["Choose first sport","Market research","Choose location","Hire coaches","Create coaching program","Start memberships","Conduct tournaments","Build sponsorship model","Build sports brand","Open additional location","Create academy management team"]],
+["Cinema Business","Enter cinema through study, capital, partnership and a proven first-theater model.",["Study cinema economics","Study locations and demand","Build cinema business plan","Build capital","Identify partners/investors","Evaluate first theater opportunity","Invest/partner","Start one theater","Improve operations","Track profitability","Expand only if profitable"]],
+["Software CEO — Scalable Engine","Make the software portfolio the main scalable business engine.",["Product portfolio","SaaS/subscriptions","Enterprise customers","International customers","Strong sales organization","Professional support","Acquisitions/partnerships","Product profitability","Build executive team"]],
+["YouTube — Personal Brand + Distribution","Use YouTube as a long-term personal brand, marketing, audience and distribution engine.",["Personal brand","Consistent content","Business storytelling","Audience growth","Business marketing","Product distribution","Training-center marketing","Sports/cinema visibility","Build media team"]],
+["Rotary / Rotaract Leadership","Progress into meaningful senior community leadership and service.",["Mentor leaders","Club-level leadership","President-level leadership","Rotary leadership","Large community projects","Build service network","Create lasting community impact"]],
+["Fitness — Lifetime Standard","Keep fitness as a permanent lifestyle rather than a one-time target.",["Maintain healthy body composition","Regular strength training","Yoga practice","Healthy nutrition","Regular tracking","Lead by example","Teach/inspire others"]]
+]},
+{title:"Level 6 — LEGACY / ₹2,000 CRORE VISION",period:"Age 50+ | Locked until Level 5 is completed",purpose:"Scale to the ₹2,000 Crore Business Group",goals:[
+["₹2,000 Crore Annual-Income Ambition","Build a business group capable of pursuing the long-term ₹2,000 crore annual-income ambition.",["Scalable business group structure","Professional executive leadership","Strong finance systems","Multiple profitable businesses","Expand software portfolio","Expand training business","Expand sports business","Expand cinema business","Enter new validated sectors","National expansion","International expansion","Large-scale capital allocation","Acquisitions and partnerships"]],
+["Business Group — Portfolio + Governance","Create a professionally managed group where businesses can operate without depending on one person.",["Business-group structure","Board/advisory capability","Executive leadership team","Business-unit CEOs/managers","Group finance","Risk management","Audit systems","Legal/compliance systems","Performance dashboards","Succession planning"]],
+["Software — Global Scale","Scale software into a major technology business with recurring and enterprise revenue.",["SaaS portfolio","Enterprise customers","International customers","Global partnerships","Acquisitions","Product R&D","Global sales","Customer success","Recurring revenue growth"]],
+["Training + Education — Large Network","Scale education and training into a large multi-location and digital network.",["Multiple locations","Online platform","Large trainer network","Standardized curriculum","Franchise/partnership model if validated","Strong brand","Institutional partnerships","National expansion"]],
+["Sports + Cinema — Expansion","Scale sports and cinema only through profitable, professionally managed models.",["Multiple sports locations","Sports tournaments","Sports sponsorships","Multiple cinema locations","Operational excellence","Capital discipline","Professional managers","Expansion based on performance"]],
+["Legacy — People, Community + Impact","Build a long-term legacy through leadership, community service, mentorship and responsible business.",["Mentor next-generation leaders","Support community projects","Rotary/Rotaract leadership legacy","Create scholarships/opportunities","Promote fitness and education","Document lessons learned","Build succession plan","Long-term social impact"]]
+]}
+];
+
+const defaultHabits=[
+["05:00","05:15","Wake up / planning","Daily"],
+["05:15","06:15","Exercise / workout","Daily"],
+["06:15","07:15","Yoga / flexibility","Daily"],
+["07:15","08:00","Reading / learning","Daily"],
+["08:00","09:00","Communication practice / recording","Daily"],
+["20:00","21:00","Technical learning / business learning","Weekdays"],
+["21:00","21:30","Reading / planning","Daily"],
+["21:30","21:45","Daily review","Daily"]
+];
+
+let STORE={};
+let SERVER_READY=false;
+function get(k,d=""){return Object.prototype.hasOwnProperty.call(STORE,k)?STORE[k]:d}
+function set(k,v){STORE[k]=String(v)}
+async function persist(){
+  try{
+    const r=await fetch('/api/state',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({levels:L,store:STORE})});
+    if(!r.ok) throw new Error('Save failed');
+    SERVER_READY=true;
+    const el=document.getElementById('saveState'); if(el) el.textContent='✓ Saved to Excel';
+  }catch(e){
+    SERVER_READY=false;
+    const el=document.getElementById('saveState'); if(el) el.textContent='⚠ Excel save failed';
+    console.error(e);
+    alert('Unable to save to Excel. Make sure the backend server is running.');
+  }
+}
+function esc(x){return String(x??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
+function gp(l,g){
+  let a=L[l].goals[g][2];
+  return a.length?Math.round(a.reduce((s,_,i)=>s+(get(`L${l}G${g}T${i}`)==="1"?1:0),0)/a.length*100):0;
+}
+function lp(l){return L[l].goals.length?Math.round(L[l].goals.reduce((s,_,g)=>s+gp(l,g),0)/L[l].goals.length):0}
+function unlocked(l){return l===0||lp(l-1)===100}
+function current(){for(let i=0;i<L.length;i++)if(lp(i)<100)return i;return L.length-1}
+function overall(){return Math.round(L.reduce((s,_,i)=>s+lp(i),0)/L.length)}
+function savePlan(){set("plan",JSON.stringify(L)); return persist()}
+function page(id,b){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
+  if(b)b.classList.add("active");
+  render();
+}
+
+function renderDashboard(){
+  let c=current(),p=lp(c),a=overall(),todo=[];
+  L[c].goals.forEach((g,gi)=>g[2].forEach((t,ti)=>{
+    if(get(`L${c}G${gi}T${ti}`)!=="1")todo.push([g[0],t]);
+  }));
+  cur.textContent="Level "+(c+1);
+  overall.textContent=a+"%";overallBar.style.width=a+"%";
+  active.textContent=p+"%";activeBar.style.width=p+"%";pending.textContent=todo.length;
+  levelsDash.innerHTML=L.map((x,i)=>{
+    let state=lp(i)===100?"✓ Completed":!unlocked(i)?"🔒 Locked":"▶ Active";
+    return `<div style="margin:14px 0">
+      <div class="row"><b>${x.title}</b><span class="muted">${x.period}</span><b class="right">${lp(i)}%</b></div>
+      <div class="progress"><div class="fill ${lp(i)===100?'green':''}" style="width:${lp(i)}%"></div></div>
+      <span class="muted">${state} — ${x.purpose}</span>
+    </div>`;
+  }).join("");
+  document.getElementById("todo").innerHTML=todo.length
+    ?todo.slice(0,20).map(x=>`<div style="padding:9px;border-bottom:1px solid #eee"><b>${x[0]}</b><br>${x[1]}</div>`).join("")
+    :"<div class='notice success'>No pending activity in the active level.</div>";
+}
+
+function renderAll(){
+  let c=current();
+  allGoals.innerHTML=L.map((x,l)=>`
+    <div class="level ${lp(l)===100?'done':''} ${!unlocked(l)?'locked':''}">
+      <div class="row"><h2>${x.title}</h2>
+      <span class="badge ${!unlocked(l)?'lock':lp(l)===100?'done':''}">${lp(l)===100?'COMPLETED':!unlocked(l)?'LOCKED':'ACTIVE'}</span>
+      <b class="right">${lp(l)}%</b></div>
+      <p class="muted">${x.period} · ${x.purpose}</p>
+      <div class="progress"><div class="fill ${lp(l)===100?'green':''}" style="width:${lp(l)}%"></div></div>
+      ${x.goals.map((g,gi)=>`<div class="goal-summary">
+        <div class="row"><div style="flex:1"><b>${esc(g[0])}</b> — ${gp(l,gi)}%<br><span class="muted">${esc(g[1])}</span></div>
+        ${unlocked(l)?`<button class="btn secondary no-print" onclick="editGoalFromComplete(${l},${gi})">Edit</button><button class="btn danger no-print" onclick="deleteGoalFromComplete(${l},${gi})">Delete</button>`:''}</div>
+      </div>`).join('')}
+      ${unlocked(l)?`<div class="goal-actions no-print"><button class="btn secondary" onclick="addGoal(${l})">+ Add Goal to ${x.title}</button></div>`:''}
+    </div>`).join('');
+}
+
+function createGoalFromComplete(){
+  let l=current();
+  if(!unlocked(l)){alert('Complete the previous level before creating goals here.');return;}
+  addGoal(l);
+  alert('New goal created in '+L[l].title+'. Open that level to edit its details and sub-goals.');
+}
+function editGoalFromComplete(l,g){
+  if(!unlocked(l))return;
+  page('level'+(l+1),document.querySelectorAll('nav button')[l+2]);
+  setTimeout(()=>{
+    let n=document.querySelector(`[data-name="${l}-${g}"]`);
+    if(n){n.focus();n.scrollIntoView({behavior:'smooth',block:'center'});}
+  },50);
+}
+function deleteGoalFromComplete(l,g){
+  if(!unlocked(l))return;
+  if(confirm('Delete this complete goal and all its sub-goals?')){
+    L[l].goals.splice(g,1);savePlan();render();
+  }
+}
+
+function renderLevel(l){
+  let el=document.getElementById("level"+(l+1)),lock=!unlocked(l),p=lp(l);
+  el.innerHTML=`
+    <div class="row">
+      <div><h2>${L[l].title}</h2><p class="muted">${L[l].period} · ${L[l].purpose}</p></div>
+      <button class="btn primary right no-print" onclick="addGoal(${l})" ${lock?'disabled':''}>+ Create Main Goal</button>
+      <button class="btn secondary no-print" onclick="printLevel(${l})">Print / PDF</button>
+      <button class="btn secondary no-print" onclick="exportCSV(${l})">Export CSV</button>
+    </div>
+    ${lock?'<div class="notice">🔒 LOCKED — complete the previous level at 100% to unlock editing and creation.</div>':''}
+    ${p===100?'<div class="notice success">✓ Level completed — next level unlocked.</div>':''}
+    <div class="cards">
+      <div class="card"><div class="muted">LEVEL PROGRESS</div><div class="metric">${p}%</div><div class="progress"><div class="fill ${p===100?'green':''}" style="width:${p}%"></div></div></div>
+      <div class="card"><div class="muted">MAIN GOALS</div><div class="metric">${L[l].goals.length}</div></div>
+      <div class="card"><div class="muted">PURPOSE</div><div class="metric" style="font-size:18px">${xSafe(L[l].purpose)}</div></div>
+    </div>
+    <div class="panel" style="margin-top:15px">
+      <h3>Full Goal Modules — Create / Edit / Delete</h3>
+      ${L[l].goals.map((g,gi)=>`
+        <div class="goal">
+          <div class="goal-head">
+            <div class="goal-body">
+              <input data-name="${l}-${gi}" value="${esc(g[0])}" ${lock?'disabled':''}>
+              <textarea data-desc="${l}-${gi}" ${lock?'disabled':''}>${esc(g[1])}</textarea>
+            </div>
+            <b>${gp(l,gi)}%</b>
+          </div>
+          <div class="progress"><div class="fill ${gp(l,gi)===100?'green':''}" style="width:${gp(l,gi)}%"></div></div>
+          <h4>Sub-goals / Activities</h4>
+          ${g[2].map((t,ti)=>{
+            let ck=get(`L${l}G${gi}T${ti}`)==="1";
+            let st=get(`S${l}G${gi}T${ti}`,ck?"Completed":"Not Started");
+            return `<div class="task">
+              <input type="checkbox" ${ck?'checked':''} ${lock?'disabled':''} onchange="toggle(${l},${gi},${ti},this.checked)">
+              <input data-task="${l}-${gi}-${ti}" value="${esc(t)}" ${lock?'disabled':''}>
+              <select ${lock?'disabled':''} onchange="status(${l},${gi},${ti},this.value)">
+                <option ${st==="Not Started"?'selected':''}>Not Started</option>
+                <option ${st==="In Progress"?'selected':''}>In Progress</option>
+                <option ${st==="Completed"?'selected':''}>Completed</option>
+                <option ${st==="Blocked"?'selected':''}>Blocked</option>
+              </select>
+              <button class="btn danger no-print" title="Delete sub-goal" onclick="delTask(${l},${gi},${ti})" ${lock?'disabled':''}>×</button>
+            </div>`;
+          }).join("")}
+          <div class="goal-actions no-print">
+            <button class="btn secondary" onclick="addTask(${l},${gi})" ${lock?'disabled':''}>+ Sub-goal</button>
+            <button class="btn primary" onclick="saveGoal(${l},${gi})" ${lock?'disabled':''}>Save Changes</button>
+            <button class="btn danger" onclick="delGoal(${l},${gi})" ${lock?'disabled':''}>Delete Goal</button>
+          </div>
+        </div>`).join("")}
+    </div>`;
+}
+function xSafe(x){return esc(x)}
+
+function toggle(l,g,t,v){
+  set(`L${l}G${g}T${t}`,v?"1":"0");
+  set(`S${l}G${g}T${t}`,v?"Completed":"In Progress");
+  render(); persist();
+}
+function status(l,g,t,v){
+  set(`S${l}G${g}T${t}`,v);
+  set(`L${l}G${g}T${t}`,v==="Completed"?"1":"0");
+  render(); persist();
+}
+function saveGoal(l,g){
+  let n=document.querySelector(`[data-name="${l}-${g}"]`);
+  let d=document.querySelector(`[data-desc="${l}-${g}"]`);
+  if(!n||!d)return;
+  L[l].goals[g][0]=n.value.trim()||"Untitled Goal";
+  L[l].goals[g][1]=d.value.trim();
+  L[l].goals[g][2]=L[l].goals[g][2].map((x,t)=>document.querySelector(`[data-task="${l}-${g}-${t}"]`)?.value.trim()||x);
+  savePlan();alert("Goal saved successfully");render();
+}
+function addGoal(l){
+  if(!unlocked(l))return;
+  L[l].goals.push(["New Goal","Describe the goal and why it matters.",["New Sub-goal"]]);
+  savePlan();render();
+}
+function addTask(l,g){
+  if(!unlocked(l))return;
+  L[l].goals[g][2].push("New Sub-goal");
+  savePlan();render();
+}
+function delTask(l,g,t){
+  if(!unlocked(l))return;
+  if(confirm("Delete this sub-goal?")){
+    L[l].goals[g][2].splice(t,1);
+    for(let i=t;i<=L[l].goals[g][2].length;i++){
+      delete STORE[`L${l}G${g}T${i}`];
+      delete STORE[`S${l}G${g}T${i}`];
+    }
+    savePlan();render();
+  }
+}
+function delGoal(l,g){
+  if(!unlocked(l))return;
+  if(confirm("Delete this main goal and its sub-goals?")){
+    L[l].goals.splice(g,1);
+    savePlan();render();
+  }
+}
+
+function normalizeHabits(){
+  let raw=JSON.parse(get("habits",JSON.stringify(defaultHabits)));
+  // Migrate the previous [time, name, frequency] format to [start, end, name, frequency].
+  return raw.map((x,i)=>{
+    if(Array.isArray(x)&&x.length>=4)return x;
+    if(Array.isArray(x)&&x.length===3){
+      let start=x[0]||defaultHabits[i]?.[0]||"05:00";
+      let parts=(start||"05:00").split(":");
+      let mins=(parseInt(parts[0]||"5",10)*60)+(parseInt(parts[1]||"0",10));
+      mins=Math.min(23*60+59,mins+30);
+      let end=String(Math.floor(mins/60)).padStart(2,"0")+":"+String(mins%60).padStart(2,"0");
+      return [start,end,x[1]||"",x[2]||"Daily"];
+    }
+    return defaultHabits[i]||["05:00","05:30","New activity","Daily"];
+  });
+}
+function renderHabits(){
+  let h=normalizeHabits();
+  habitsBox.innerHTML=`
+    <div class="schedule-head">
+      <span></span><span>Activity</span><span>Start Time</span><span>End Time</span><span>Frequency</span><span></span>
+    </div>`+
+    h.map((x,i)=>`
+    <div class="schedule-row">
+      <input type="checkbox" ${get("HD"+i)==="1"?'checked':''} onchange="set('HD${i}',this.checked?'1':'0')">
+      <input data-hn="${i}" value="${esc(x[2])}" placeholder="Activity">
+      <input class="schedule-time-label" data-hs="${i}" type="time" value="${x[0]}">
+      <input class="schedule-time-label" data-he="${i}" type="time" value="${x[1]}">
+      <select data-hf="${i}">
+        <option value="Daily" ${x[3]==="Daily"?'selected':''}>Daily</option>
+        <option value="Weekdays" ${x[3]==="Weekdays"?'selected':''}>Weekdays</option>
+        <option value="Weekends" ${x[3]==="Weekends"?'selected':''}>Weekends</option>
+        <option value="Weekly" ${x[3]==="Weekly"?'selected':''}>Weekly</option>
+        <option value="Monthly" ${x[3]==="Monthly"?'selected':''}>Monthly</option>
+      </select>
+      <button class="btn danger no-print" onclick="deleteHabit(${i})" title="Delete schedule">×</button>
+    </div>`).join("");
+}
+function saveHabits(){
+  let h=normalizeHabits().map((x,i)=>[
+    document.querySelector(`[data-hs="${i}"]`).value,
+    document.querySelector(`[data-he="${i}"]`).value,
+    document.querySelector(`[data-hn="${i}"]`).value,
+    document.querySelector(`[data-hf="${i}"]`).value
+  ]);
+  set("habits",JSON.stringify(h));alert("Schedule saved to Excel");renderHabits();persist();
+}
+function addHabit(){
+  let h=normalizeHabits();
+  h.push(["22:00","22:30","New activity","Daily"]);
+  set("habits",JSON.stringify(h));renderHabits();persist();
+}
+function deleteHabit(i){
+  let h=normalizeHabits();
+  if(h.length<=1){alert("At least one schedule item is required.");return;}
+  if(confirm("Delete this schedule item?")){h.splice(i,1);set("habits",JSON.stringify(h));renderHabits();persist();}
+}
+function printCurrent(){window.print()}
+function printAll(){window.print()}
+function printLevel(l){window.print()}
+
+function exportCSV(l=null){
+  let rows=[["Level","Period","Purpose","Main Goal","Description","Sub-goal","Status","Completed","Goal %","Level %"]];
+  let from=l===null?0:l,to=l===null?L.length:l+1;
+  for(let i=from;i<to;i++)L[i].goals.forEach((g,gi)=>g[2].forEach((t,ti)=>{
+    rows.push([L[i].title,L[i].period,L[i].purpose,g[0],g[1],t,get(`S${i}G${gi}T${ti}`,"Not Started"),get(`L${i}G${gi}T${ti}`)==="1"?"Yes":"No",gp(i,gi)+"%",lp(i)+"%"]);
+  }));
+  let csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\r\n");
+  let a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+  a.download=l===null?"My_Life_Vision_Tracker_All_Levels.csv":`Level_${l+1}_Progress.csv`;
+  a.click();
+}
+
+async function initApp(){
+  try{
+    const r=await fetch('/api/state');
+    if(!r.ok) throw new Error('Could not load Excel data');
+    const state=await r.json();
+    if(Array.isArray(state.levels)) L=state.levels;
+    STORE=state.store||{};
+    SERVER_READY=true;
+    render();
+    const el=document.getElementById('saveState'); if(el) el.textContent='✓ Connected to Excel';
+  }catch(e){
+    console.error(e);
+    render();
+    const el=document.getElementById('saveState'); if(el) el.textContent='⚠ Backend unavailable';
+    alert('Backend is not available. Start the server with: npm install && npm start');
+  }
+}
+function downloadExcelFile(){ window.location.href='/api/download/excel'; }
+function render(){
+  renderDashboard();renderAll();
+  for(let i=0;i<L.length;i++)renderLevel(i);
+  renderHabits();
+}
+initApp();
+</script>
+</body>
+</html>

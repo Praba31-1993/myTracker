@@ -1,0 +1,628 @@
+{
+  "levels": [
+    {
+      "title": "Level 1 — FOUNDATION",
+      "period": "Age 32–33 | Aug 2026–Aug 2027",
+      "purpose": "Build Yourself",
+      "goals": [
+        [
+          "Career — Strong Product / MNC Role",
+          "Strengthen your career foundation and move toward a strong product-company/MNC opportunity.",
+          [
+            "Resume + LinkedIn",
+            "GitHub portfolio",
+            "React + TypeScript interview preparation",
+            "Next.js + Node.js backend skills",
+            "MongoDB + AWS + Terraform",
+            "Testing with Jest + Playwright",
+            "DSA + System Design",
+            "Mock interviews",
+            "Apply consistently",
+            "Secure target role"
+          ]
+        ],
+        [
+          "Salary — ₹75,000/month",
+          "Reach a monthly salary of at least ₹75,000.",
+          [
+            "Identify current salary gap",
+            "Create salary-growth plan",
+            "Complete interview preparation",
+            "Attend mock interviews",
+            "Apply to target companies",
+            "Attend interviews",
+            "Negotiate offer",
+            "Secure ₹75,000+ monthly salary"
+          ]
+        ],
+        [
+          "Product #1 — Build & Launch",
+          "Build and launch the first real software product.",
+          [
+            "Choose customer problem",
+            "Define target users",
+            "Define MVP",
+            "Design UI/UX",
+            "Develop frontend",
+            "Develop backend/API",
+            "Database + authentication",
+            "Testing",
+            "AWS deployment",
+            "Public launch",
+            "Get first users",
+            "Collect feedback",
+            "Improve product"
+          ]
+        ],
+        [
+          "Communication — Tamil + English",
+          "Become confident in everyday communication, professional communication and public speaking.",
+          [
+            "Record 10 speaking videos",
+            "Daily English speaking",
+            "Daily Tamil speaking",
+            "Practice introductions",
+            "Talk with new people",
+            "Group discussions",
+            "Interview speaking practice",
+            "Give one public-speaking opportunity",
+            "Improve vocabulary and clarity"
+          ]
+        ],
+        [
+          "Fitness — Lose 10 KG",
+          "Build a consistent fitness lifestyle and reduce weight/body fat.",
+          [
+            "Record starting weight",
+            "Record waist measurement",
+            "Workout consistently",
+            "Improve food habits",
+            "Weekly weight tracking",
+            "Monthly waist tracking",
+            "Build sleep discipline",
+            "Reach 5 KG loss",
+            "Reach 10 KG loss",
+            "Maintain the result"
+          ]
+        ],
+        [
+          "Savings — First ₹10,000",
+          "Build the first savings milestone and disciplined money habit.",
+          [
+            "Create dedicated savings plan",
+            "Track monthly expenses",
+            "Reduce unnecessary spending",
+            "Save every month",
+            "Reach ₹5,000",
+            "Reach ₹10,000",
+            "Maintain savings habit"
+          ]
+        ],
+        [
+          "Rotaract — Minimum 4 Projects",
+          "Complete at least four meaningful Rotaract projects during Level 1 and build your foundation as a project leader.",
+          [
+            "Project 1 — Community Service",
+            "Project 2 — Education / Youth",
+            "Project 3 — Health / Environment",
+            "Project 4 — Social Awareness / Fundraising",
+            "Prepare project plan and budget",
+            "Lead volunteers",
+            "Document beneficiaries and outcomes",
+            "Complete project reports"
+          ]
+        ]
+      ]
+    },
+    {
+      "title": "Level 2 — GROWTH",
+      "period": "Age 33–36",
+      "purpose": "Build Skills + Audience",
+      "goals": [
+        [
+          "Product #2 — Build & Launch",
+          "Build the second software product using lessons from Product #1.",
+          [
+            "Research problem",
+            "Validate customer need",
+            "Define MVP",
+            "Design product",
+            "Build frontend",
+            "Build backend",
+            "Authentication + database",
+            "Testing",
+            "Deploy",
+            "Launch",
+            "Acquire first users",
+            "Collect feedback",
+            "Generate first revenue"
+          ]
+        ],
+        [
+          "YouTube — Build Audience",
+          "Create a YouTube channel and build a consistent audience.",
+          [
+            "Choose niche",
+            "Create channel",
+            "Create branding",
+            "Define content pillars",
+            "Create first 10 Shorts",
+            "Publish consistently",
+            "Create long-form content",
+            "Track analytics",
+            "Improve thumbnails/titles",
+            "Build audience",
+            "Develop content calendar"
+          ]
+        ],
+        [
+          "Video Editing + AI Content",
+          "Develop practical editing and AI-assisted content creation skills.",
+          [
+            "Learn editing fundamentals",
+            "Practice Shorts editing",
+            "Create 10 practice videos",
+            "Learn AI video workflow",
+            "Create AI-assisted videos",
+            "Build reusable templates",
+            "Create publishing workflow",
+            "Improve quality and storytelling"
+          ]
+        ],
+        [
+          "Fitness — Six Pack + Yoga",
+          "Move from weight loss into strong body composition, six-pack fitness and Yoga.",
+          [
+            "Maintain workout routine",
+            "Strength training",
+            "Core training",
+            "Improve nutrition",
+            "Track body composition",
+            "Learn Yoga basics",
+            "Practice Yoga consistently",
+            "Build flexibility",
+            "Reach six-pack target",
+            "Maintain result"
+          ]
+        ],
+        [
+          "Finance — Stronger Savings",
+          "Build stronger savings discipline and begin preparing for larger investments.",
+          [
+            "Monthly savings system",
+            "Emergency reserve",
+            "Track net worth",
+            "Reach ₹15,000 milestone",
+            "Reach ₹25,000 milestone",
+            "Increase savings rate",
+            "Learn basic investing",
+            "Review finances quarterly"
+          ]
+        ],
+        [
+          "Rotaract — Minimum 4 Projects",
+          "Complete at least four meaningful Rotaract projects while building stronger leadership and community impact.",
+          [
+            "Project 1 — Education / Skill Development",
+            "Project 2 — Health / Wellness",
+            "Project 3 — Environment / Community Development",
+            "Project 4 — Youth Leadership / Fundraising",
+            "Lead volunteers",
+            "Measure beneficiaries and outcomes",
+            "Publish project impact report"
+          ]
+        ]
+      ]
+    },
+    {
+      "title": "Level 3 — BUSINESS CREATION",
+      "period": "Age 36–41",
+      "purpose": "Build Businesses",
+      "goals": [
+        [
+          "Product #3 — Build & Launch",
+          "Launch the third software product and create a repeatable product-building system.",
+          [
+            "Research market",
+            "Validate problem",
+            "Define MVP",
+            "Build product",
+            "Test with users",
+            "Deploy",
+            "Launch",
+            "Acquire first users",
+            "First revenue",
+            "Improve retention",
+            "Document product operations"
+          ]
+        ],
+        [
+          "YouTube — Income + Distribution",
+          "Turn YouTube into an income source and a distribution channel for future businesses.",
+          [
+            "Create consistent content system",
+            "Grow audience",
+            "Study monetization",
+            "Meet applicable eligibility",
+            "Earn first income",
+            "Build sponsorship capability",
+            "Create repeatable content strategy",
+            "Use audience to support products",
+            "Track monthly revenue"
+          ]
+        ],
+        [
+          "Training Center — Start Small",
+          "Start a validated training-center business covering Software, Yoga, Tuition and Sports.",
+          [
+            "Research business model",
+            "Choose location/model",
+            "Define courses",
+            "Software curriculum",
+            "Yoga curriculum",
+            "Tuition curriculum",
+            "Sports curriculum",
+            "Recruit first trainers",
+            "Get first learners",
+            "Run first paid batch",
+            "Collect feedback",
+            "Create SOPs",
+            "Validate unit economics"
+          ]
+        ],
+        [
+          "Business Operations",
+          "Learn to operate a small business with systems instead of doing everything personally.",
+          [
+            "Basic accounting system",
+            "Sales process",
+            "Customer support process",
+            "Marketing process",
+            "Hiring process",
+            "Trainer/team management",
+            "Monthly P&L review",
+            "Document SOPs",
+            "Delegate recurring work"
+          ]
+        ],
+        [
+          "Finance — Build Capital",
+          "Move from personal savings toward meaningful capital for future business expansion.",
+          [
+            "Build emergency reserve",
+            "Track net worth",
+            "Increase savings/investments",
+            "Learn business finance",
+            "Review investments yearly",
+            "Create expansion fund",
+            "Prepare capital allocation rules"
+          ]
+        ],
+        [
+          "Rotaract — Minimum 4 Projects",
+          "Complete at least four meaningful Rotaract projects while building business, team and community leadership.",
+          [
+            "Project 1 — Large Community Project",
+            "Project 2 — Education / Career Project",
+            "Project 3 — Health / Sports Project",
+            "Project 4 — Environment / Social Impact Project",
+            "Build project teams",
+            "Partner with organizations",
+            "Track budget and impact",
+            "Document project results"
+          ]
+        ]
+      ]
+    },
+    {
+      "title": "Level 4 — CEO",
+      "period": "Age 41–48",
+      "purpose": "Become CEO + Build Capital",
+      "goals": [
+        [
+          "Software CEO — Product Portfolio",
+          "Become the CEO/operator of a scalable software business with multiple products.",
+          [
+            "Build leadership team",
+            "Product roadmap",
+            "Sales process",
+            "Marketing process",
+            "Customer support system",
+            "Finance system",
+            "HR/recruitment process",
+            "Company KPIs",
+            "Scale customers",
+            "Track profit and cash flow",
+            "Build managers",
+            "Reduce founder dependency"
+          ]
+        ],
+        [
+          "Multiple Businesses — Revenue Streams",
+          "Operate multiple validated businesses with professional management.",
+          [
+            "Software products",
+            "YouTube/content",
+            "Training center",
+            "Yoga business",
+            "Sports business",
+            "Other validated businesses",
+            "Appoint managers",
+            "Create SOPs",
+            "Set business KPIs",
+            "Review each business monthly"
+          ]
+        ],
+        [
+          "Capital — Savings + Investments",
+          "Build strong capital, savings and investments for large-scale expansion.",
+          [
+            "Build lakhs-level savings",
+            "Create investment plan",
+            "Diversify investments",
+            "Track net worth yearly",
+            "Maintain emergency reserve",
+            "Create business investment fund",
+            "Study acquisitions/partnerships",
+            "Build capital allocation discipline"
+          ]
+        ],
+        [
+          "Training Center — Validated Model",
+          "Turn the training center into a professional, scalable business model.",
+          [
+            "Multiple trainers",
+            "Multiple batches",
+            "Online + offline programs",
+            "Strong curriculum",
+            "Brand building",
+            "Management systems",
+            "Profitability tracking",
+            "Prepare multiple-location model"
+          ]
+        ],
+        [
+          "Leadership + Public Speaking",
+          "Develop the leadership capability required to manage people, businesses and large initiatives.",
+          [
+            "Lead teams",
+            "Mentor leaders",
+            "Public speaking",
+            "Negotiation",
+            "Decision making",
+            "Strategic planning",
+            "CEO communication",
+            "Build leadership culture"
+          ]
+        ],
+        [
+          "Rotaract / Rotary Leadership",
+          "Build long-term community leadership alongside business leadership.",
+          [
+            "Project leadership",
+            "Club leadership",
+            "President-level responsibility",
+            "Rotary leadership exposure",
+            "Community projects",
+            "Mentor younger leaders",
+            "Build long-term service identity"
+          ]
+        ]
+      ]
+    },
+    {
+      "title": "Level 5 — VISION EXECUTION",
+      "period": "Age 48–50",
+      "purpose": "Execute the Big Vision",
+      "goals": [
+        [
+          "Large Training Center",
+          "Expand the validated training model into a large multi-program training organization.",
+          [
+            "Software training",
+            "Yoga training",
+            "Tuition programs",
+            "Sports programs",
+            "Multiple trainers",
+            "Multiple batches",
+            "Online + offline",
+            "Multiple locations",
+            "Strong brand",
+            "Professional operations",
+            "Track profitability",
+            "Build leadership team"
+          ]
+        ],
+        [
+          "Sports Academy",
+          "Build a professional sports academy beginning with one sport and expand only after proving the model.",
+          [
+            "Choose first sport",
+            "Market research",
+            "Choose location",
+            "Hire coaches",
+            "Create coaching program",
+            "Start memberships",
+            "Conduct tournaments",
+            "Build sponsorship model",
+            "Build sports brand",
+            "Open additional location",
+            "Create academy management team"
+          ]
+        ],
+        [
+          "Cinema Business",
+          "Enter cinema through study, capital, partnership and a proven first-theater model.",
+          [
+            "Study cinema economics",
+            "Study locations and demand",
+            "Build cinema business plan",
+            "Build capital",
+            "Identify partners/investors",
+            "Evaluate first theater opportunity",
+            "Invest/partner",
+            "Start one theater",
+            "Improve operations",
+            "Track profitability",
+            "Expand only if profitable"
+          ]
+        ],
+        [
+          "Software CEO — Scalable Engine",
+          "Make the software portfolio the main scalable business engine.",
+          [
+            "Product portfolio",
+            "SaaS/subscriptions",
+            "Enterprise customers",
+            "International customers",
+            "Strong sales organization",
+            "Professional support",
+            "Acquisitions/partnerships",
+            "Product profitability",
+            "Build executive team"
+          ]
+        ],
+        [
+          "YouTube — Personal Brand + Distribution",
+          "Use YouTube as a long-term personal brand, marketing, audience and distribution engine.",
+          [
+            "Personal brand",
+            "Consistent content",
+            "Business storytelling",
+            "Audience growth",
+            "Business marketing",
+            "Product distribution",
+            "Training-center marketing",
+            "Sports/cinema visibility",
+            "Build media team"
+          ]
+        ],
+        [
+          "Rotary / Rotaract Leadership",
+          "Progress into meaningful senior community leadership and service.",
+          [
+            "Mentor leaders",
+            "Club-level leadership",
+            "President-level leadership",
+            "Rotary leadership",
+            "Large community projects",
+            "Build service network",
+            "Create lasting community impact"
+          ]
+        ],
+        [
+          "Fitness — Lifetime Standard",
+          "Keep fitness as a permanent lifestyle rather than a one-time target.",
+          [
+            "Maintain healthy body composition",
+            "Regular strength training",
+            "Yoga practice",
+            "Healthy nutrition",
+            "Regular tracking",
+            "Lead by example",
+            "Teach/inspire others"
+          ]
+        ]
+      ]
+    },
+    {
+      "title": "Level 6 — LEGACY / ₹2,000 CRORE VISION",
+      "period": "Age 50+ | Locked until Level 5 is completed",
+      "purpose": "Scale to the ₹2,000 Crore Business Group",
+      "goals": [
+        [
+          "₹2,000 Crore Annual-Income Ambition",
+          "Build a business group capable of pursuing the long-term ₹2,000 crore annual-income ambition.",
+          [
+            "Scalable business group structure",
+            "Professional executive leadership",
+            "Strong finance systems",
+            "Multiple profitable businesses",
+            "Expand software portfolio",
+            "Expand training business",
+            "Expand sports business",
+            "Expand cinema business",
+            "Enter new validated sectors",
+            "National expansion",
+            "International expansion",
+            "Large-scale capital allocation",
+            "Acquisitions and partnerships"
+          ]
+        ],
+        [
+          "Business Group — Portfolio + Governance",
+          "Create a professionally managed group where businesses can operate without depending on one person.",
+          [
+            "Business-group structure",
+            "Board/advisory capability",
+            "Executive leadership team",
+            "Business-unit CEOs/managers",
+            "Group finance",
+            "Risk management",
+            "Audit systems",
+            "Legal/compliance systems",
+            "Performance dashboards",
+            "Succession planning"
+          ]
+        ],
+        [
+          "Software — Global Scale",
+          "Scale software into a major technology business with recurring and enterprise revenue.",
+          [
+            "SaaS portfolio",
+            "Enterprise customers",
+            "International customers",
+            "Global partnerships",
+            "Acquisitions",
+            "Product R&D",
+            "Global sales",
+            "Customer success",
+            "Recurring revenue growth"
+          ]
+        ],
+        [
+          "Training + Education — Large Network",
+          "Scale education and training into a large multi-location and digital network.",
+          [
+            "Multiple locations",
+            "Online platform",
+            "Large trainer network",
+            "Standardized curriculum",
+            "Franchise/partnership model if validated",
+            "Strong brand",
+            "Institutional partnerships",
+            "National expansion"
+          ]
+        ],
+        [
+          "Sports + Cinema — Expansion",
+          "Scale sports and cinema only through profitable, professionally managed models.",
+          [
+            "Multiple sports locations",
+            "Sports tournaments",
+            "Sports sponsorships",
+            "Multiple cinema locations",
+            "Operational excellence",
+            "Capital discipline",
+            "Professional managers",
+            "Expansion based on performance"
+          ]
+        ],
+        [
+          "Legacy — People, Community + Impact",
+          "Build a long-term legacy through leadership, community service, mentorship and responsible business.",
+          [
+            "Mentor next-generation leaders",
+            "Support community projects",
+            "Rotary/Rotaract leadership legacy",
+            "Create scholarships/opportunities",
+            "Promote fitness and education",
+            "Document lessons learned",
+            "Build succession plan",
+            "Long-term social impact"
+          ]
+        ]
+      ]
+    }
+  ]
+}
